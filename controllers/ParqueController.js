@@ -12,5 +12,5 @@ const getAllParques = async (req, res) => {
 };
 
 module.exports = {
-  getAllTipoPagamento,
+  getAllParques,
 };
