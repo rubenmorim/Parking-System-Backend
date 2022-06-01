@@ -2,7 +2,7 @@ const EstacionamentoController = require("../controllers/EstacionamentoControlle
 
 const router = require("express").Router();
 
-// router.post("/iniciarParque", EstacionamentoController.createMatricula);
+router.post("/iniciarParque", EstacionamentoController.iniciarParquimetro);
 
 // router.post("/renovarParque", EstacionamentoController.getMatriculaUtilizador);
 

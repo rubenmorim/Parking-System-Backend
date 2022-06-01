@@ -9,20 +9,16 @@ const Estacionamento = db.Estacionamento;
 
 //-------------------------- Endpoints Controllers -----------------------
 
-const getMatriculaUtilizador = async (req, res) => {
-  const { idUtilizador } = req.body;
+const iniciarParquimetro = async (req, res) => {
+  const { idUtilizador, idParque, Tempo } = req.body;
 
   try {
-    matriculasUser = await Matricula.findAll({
-      where: {
-        idUtilizador: idUtilizador,
-      },
-    });
+    parqueIniciado = await Estacionamento.create({});
 
-    res.status(200).send(matriculasUser);
+    res.status(200).send(parqueIniciado);
   } catch (e) {
     res.status(400).send("Ocorreu Algum Erro");
   }
 };
 
-module.exports = {};
+const RenovarParquimetro = (module.exports = { iniciarParquimetro });
