@@ -5,18 +5,18 @@ Use Parking_System;
 
 
 CREATE TABLE tipoPagamento (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
   tipoPagamento Varchar(50)	
 );
 
 CREATE TABLE tipoParque (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
   tipoParque Varchar(50)
 );
 
 CREATE TABLE Utilizador (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  email Varchar(50) Not Null,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
+  email Varchar(50) Not Null Unique,
   password INT Not Null,
   firstName Varchar(50) Not Null,
   lastName Varchar(50) Not Null,
@@ -24,25 +24,26 @@ CREATE TABLE Utilizador (
 );
 
 CREATE TABLE Wallet (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  idUtilizador INT Not Null,
-  idTipoPagamento INT Not Null,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
+  idUtilizador bigint Not Null,
+  idTipoPagamento bigint Not Null,
   dados Varchar(50) Not Null,
   Constraint fk_WalletUtilizador FOREIGN KEY(idUtilizador) REFERENCES Utilizador(id),
   Constraint fk_tipoPagamento FOREIGN KEY(idTipoPagamento) REFERENCES tipoPagamento(id)
 );
 
 CREATE TABLE Matricula (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
+  nomeCarro Varchar(50) Not Null,
   matricula Varchar(50) Not Null,
-  idUtilizador INT Not Null,
-  isSelected Boolean Not Null,
+  idUtilizador bigint Not Null,
+  isSelected Boolean Not Null default false,
   Constraint fk_matriculaUtilizador FOREIGN KEY(idUtilizador) REFERENCES Utilizador(id)
 );
 
 CREATE TABLE Parque (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  idTipoParque Int Not Null,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
+  idTipoParque bigint Not Null,
   nomeParque Varchar(100) Not Null,
   precoHora float Not Null,
   totalVagas INT Not Null,
@@ -55,10 +56,10 @@ CREATE TABLE Parque (
 
 
 CREATE TABLE Estacionamento (
-  id INTEGER AUTO_INCREMENT PRIMARY KEY,
-  idMatricula INT Not Null,
-  idParque INT Not Null,
-  idUtilizador INT Not Null,
+  id bigint AUTO_INCREMENT PRIMARY KEY,
+  idMatricula bigint Not Null,
+  idParque bigint Not Null,
+  idUtilizador bigint Not Null,
   entrada Date Not Null,
   saida Date Not Null,
   isPago boolean Not Null default false,
@@ -84,9 +85,12 @@ Insert Into tipoParque(tipoParque) Values ("Parquímetro");
 
 
 /* Utilizador */ 
+-- Select * from Utilizador;
 
 
-
+--  Select * from Utilizador INNER JOIN Matricula 
+--  on Utilizador.id = Matricula.idUtilizador 
+ Where Utilizador.id = 1654104731574;
 
 
 

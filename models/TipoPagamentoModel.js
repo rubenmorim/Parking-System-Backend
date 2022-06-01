@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
     "tipoPagamento",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
       },
       tipoPagamento: {

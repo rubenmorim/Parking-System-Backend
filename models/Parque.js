@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     "Parque",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
       },
       idTipoParque: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "tipoParque",

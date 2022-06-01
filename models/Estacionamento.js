@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     "Estacionamento",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
       },
       idMatricula: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "Matricula",
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       idParque: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "Parque",
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       idUtilizador: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "Utilizador",

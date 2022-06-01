@@ -3,15 +3,19 @@ module.exports = (sequelize, DataTypes) => {
     "Matricula",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
+      },
+      nomeCarro: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       matricula: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       idUtilizador: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "Utilizador",
@@ -20,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
       },
       isSelected: {
         type: DataTypes.BOOLEAN,
-        allowNull: true,
+        allowNull: false,
+        default: false,
       },
     },
     { freezeTableName: true, timestamps: false }

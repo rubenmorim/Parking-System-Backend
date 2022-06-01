@@ -3,11 +3,11 @@ module.exports = (sequelize, DataTypes) => {
     "Wallet",
     {
       id: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         primaryKey: true,
       },
       idUtilizador: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           model: "Utilizador",
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       idTipoPagamento: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BIGINT,
         allowNull: false,
         references: {
           //references...
