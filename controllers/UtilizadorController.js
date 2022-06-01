@@ -46,18 +46,27 @@ const createUtilizador = async (req, res) => {
 };
 
 const getUtilizador = async (req, res) => {
-  const { email, password, firstName, lastName, birthday } = req.body;
+  const { email, password } = req.body;
 
   try {
-    await Utilizador.create({
-      email: email,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      birthday: birthday,
+    loggedUser = await Utilizador.findAll({
+      where: {
+        email: email,
+        password: password,
+      },
     });
 
-    await res.status(200).send("Registado com sucesso!");
+    if (loggedUser.length === 0) {
+      await res.status(200).json({
+        responseStatus: false,
+        response: "Email ou Password Incorretos!",
+      });
+    } else {
+      delete loggedUser[0].dataValues.password;
+      await res
+        .status(200)
+        .json({ responseStatus: true, response: loggedUser[0].dataValues });
+    }
   } catch (error) {
     console.log(error);
     res.status(400).send("Ocorreu algum erro");
