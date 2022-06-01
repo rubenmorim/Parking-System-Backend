@@ -11,10 +11,14 @@ app.use(bodyParser.json());
 const routerTipoPagamentos = require("./routes/tipoPagamentoRouter.js");
 const routerParques = require("./routes/parquesRouter.js");
 const routerUtilizador = require("./routes/UtilizadorRoutes.js");
+const routerMatricula = require("./routes/matriculasRouter.js");
+const routerEstacionamento = require("./routes/estacionamentoRouter.js");
 
 app.use("/api/tipoPagamento", routerTipoPagamentos);
 app.use("/api/parques", routerParques);
 app.use("/api/utilizador", routerUtilizador);
+app.use("/api/matricula", routerMatricula);
+app.use("/api/estacionamento", routerEstacionamento);
 
 //initializer
 

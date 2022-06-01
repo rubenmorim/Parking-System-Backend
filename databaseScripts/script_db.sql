@@ -85,12 +85,12 @@ Insert Into tipoParque(tipoParque) Values ("Parquímetro");
 
 
 /* Utilizador */ 
--- Select * from Utilizador;
+--  Select * from Utilizador;
 
 
---  Select * from Utilizador INNER JOIN Matricula 
---  on Utilizador.id = Matricula.idUtilizador 
- Where Utilizador.id = 1654104731574;
+--   Select * from Utilizador INNER JOIN Matricula 
+--   on Utilizador.id = Matricula.idUtilizador 
+--  Where Utilizador.id = 1654106112592;
 
 
 

@@ -1,10 +1,10 @@
 const { generateID } = require("./utils.js");
+const { createMatriculaService } = require("./MatriculaController.js");
 
 const db = require("../models");
 //create Main Model
 
 const Utilizador = db.Utilizador;
-const Matricula = db.Matricula;
 
 //main Work
 const createUtilizador = async (req, res) => {
@@ -29,13 +29,7 @@ const createUtilizador = async (req, res) => {
     });
 
     if (nomeCarro && matricula) {
-      await Matricula.create({
-        id: generateID(),
-        nomeCarro: nomeCarro,
-        matricula: matricula,
-        isSelected: true,
-        idUtilizador: createdUser.id,
-      });
+      await createMatriculaService(createdUser.id, nomeCarro, matricula, true);
     }
 
     res.status(200).send("Registado com sucesso!");
