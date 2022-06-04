@@ -61,6 +61,26 @@ const getMatriculaUtilizador = async (req, res) => {
   }
 };
 
+//Mudar Matricula - Not Implemented
+const mudarMatriculaUtilizador = async (req, res) => {
+  const { idUtilizador, idMatricula } = req.query;
+
+  //update à matricula que quer mudar
+  // pegar na matricula que está isSelected e colocar a falso
+
+  try {
+    matriculasUser = await Matricula.findAll({
+      where: {
+        idUtilizador: idUtilizador,
+      },
+    });
+
+    res.status(200).send(matriculasUser);
+  } catch (e) {
+    res.status(400).send("Ocorreu Algum Erro");
+  }
+};
+
 module.exports = {
   createMatriculaService,
   createMatricula,

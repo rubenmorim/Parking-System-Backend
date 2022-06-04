@@ -11,6 +11,19 @@ const getAllParques = async (req, res) => {
   res.status(200).send(allParques);
 };
 
+const getParqueById = async (req, res) => {
+  const { id } = req.query;
+
+  let getParque = await Parque.findAll({
+    where: {
+      id: id,
+    },
+  });
+
+  res.status(200).send(getParque);
+};
+
 module.exports = {
   getAllParques,
+  getParqueById,
 };
