@@ -102,13 +102,30 @@ const iniciarParquimetro = async (req, res) => {
 };
 
 const getHistorico = async (req, res) => {
-  const { id } = req.query;
+  const { id } = req.params;
 
   try {
-    let historicoParques = await Estacionamento.findAll();
+    let historicoParques = await Estacionamento.findAll({
+      where: {
+        idUtilizador: id,
+        isPago: true,
+      },
+    });
 
-    res.status(200).send(historicoParques);
+    let finalParques = await Promise.all(
+      historicoParques.map(async (item) => {
+        let parqueItem = await getParqueByIdService(item.dataValues.idParque);
+        item.dataValues["nomeParque"] = parqueItem[0].dataValues.nomeParque;
+
+        return item.dataValues;
+      })
+    );
+
+    console.log(finalParques);
+
+    res.status(200).send(finalParques);
   } catch (e) {
+    console.log(e);
     res.status(400).send("Ocorreu Algum Erro");
   }
 };

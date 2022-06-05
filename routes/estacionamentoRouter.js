@@ -4,7 +4,7 @@ const router = require("express").Router();
 
 router.post("/iniciarParquimetro", EstacionamentoController.iniciarParquimetro);
 
-router.get("/getHistorico", EstacionamentoController.getHistorico);
+router.get("/getHistorico/:id", EstacionamentoController.getHistorico);
 
 router.get(
   "/getEstacionamentoAtual",
@@ -17,7 +17,5 @@ router.get(
   "/concluirParquimetro",
   EstacionamentoController.concluirParquimetro
 );
-
-// router.post("/concluirParque", EstacionamentoController.getMatriculaUtilizador);
 
 module.exports = router;
