@@ -4,8 +4,8 @@ const router = require("express").Router();
 
 router.post("/createMatricula", MatriculaController.createMatricula);
 
-router.post(
-  "/getMatriculaUtilizador",
+router.get(
+  "/getMatriculaUtilizador/:idUtilizador",
   MatriculaController.getMatriculaUtilizador
 );
 

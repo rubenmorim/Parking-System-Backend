@@ -63,7 +63,7 @@ const createMatricula = async (req, res) => {
 };
 
 const getMatriculaUtilizador = async (req, res) => {
-  const { idUtilizador } = req.body;
+  const { idUtilizador } = req.params;
 
   try {
     let matriculasUser = await getMatriculaByIdService(idUtilizador);
