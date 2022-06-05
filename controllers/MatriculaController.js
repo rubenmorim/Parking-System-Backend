@@ -28,6 +28,23 @@ const createMatriculaService = async (
   }
 };
 
+const getMatriculaByIdService = async (idUtilizador) => {
+  let matriculasUser;
+
+  try {
+    matriculasUser = await Matricula.findAll({
+      where: {
+        idUtilizador: idUtilizador,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    throw new Error("falha get Matriculas");
+  }
+
+  return matriculasUser;
+};
+
 //-------------------------- Endpoints Controllers -----------------------
 
 const createMatricula = async (req, res) => {
@@ -49,11 +66,7 @@ const getMatriculaUtilizador = async (req, res) => {
   const { idUtilizador } = req.body;
 
   try {
-    matriculasUser = await Matricula.findAll({
-      where: {
-        idUtilizador: idUtilizador,
-      },
-    });
+    let matriculasUser = await getMatriculaByIdService(idUtilizador);
 
     res.status(200).send(matriculasUser);
   } catch (e) {
@@ -85,4 +98,5 @@ module.exports = {
   createMatriculaService,
   createMatricula,
   getMatriculaUtilizador,
+  getMatriculaByIdService,
 };

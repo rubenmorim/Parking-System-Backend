@@ -2,11 +2,21 @@ const EstacionamentoController = require("../controllers/EstacionamentoControlle
 
 const router = require("express").Router();
 
-router.post("/iniciarParque", EstacionamentoController.iniciarParquimetro);
+router.post("/iniciarParquimetro", EstacionamentoController.iniciarParquimetro);
 
 router.get("/getHistorico", EstacionamentoController.getHistorico);
 
-// router.post("/renovarParque", EstacionamentoController.getMatriculaUtilizador);
+router.get(
+  "/getEstacionamentoAtual",
+  EstacionamentoController.getEstacionamentoAtual
+);
+
+router.get("/renovarParquimetro", EstacionamentoController.renovarParquimetro);
+
+router.get(
+  "/concluirParquimetro",
+  EstacionamentoController.concluirParquimetro
+);
 
 // router.post("/concluirParque", EstacionamentoController.getMatriculaUtilizador);
 

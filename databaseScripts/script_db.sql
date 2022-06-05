@@ -60,8 +60,8 @@ CREATE TABLE Estacionamento (
   idMatricula bigint Not Null,
   idParque bigint Not Null,
   idUtilizador bigint Not Null,
-  entrada Date Not Null,
-  saida Date Not Null,
+  entrada Varchar(50) Not Null,
+  saida Varchar(50),
   isPago boolean Not Null default false,
   Constraint fk_estacionamentoUtilizador FOREIGN KEY(idUtilizador) REFERENCES Utilizador(id),
   Constraint fk_estacionamentoMatricula FOREIGN KEY(idMatricula) REFERENCES Matricula(id),
@@ -92,7 +92,10 @@ Insert Into tipoParque(tipoParque) Values ("Parquímetro");
 --   on Utilizador.id = Matricula.idUtilizador 
 --  Where Utilizador.id = 1654106112592;
 
+/*--------Estacionamento */ 
 
+Delete from Estacionamento;
+Select * from Estacionamento;
 
 
 /* Parques*/

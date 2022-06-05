@@ -31,11 +31,11 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       entrada: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       saida: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       isPago: {
