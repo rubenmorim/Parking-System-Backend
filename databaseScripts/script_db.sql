@@ -94,9 +94,10 @@ Insert Into tipoParque(tipoParque) Values ("Parquímetro");
 
 /*--------Estacionamento */ 
 
-Delete from Estacionamento;
 Select * from Estacionamento;
 
+
+Select * from Matricula
 
 /* Parques*/
 

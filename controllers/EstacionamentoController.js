@@ -105,7 +105,7 @@ const getHistorico = async (req, res) => {
   const { id } = req.query;
 
   try {
-    let historicoParques = await getEstacionamentoByIdUtilizadorService(id);
+    let historicoParques = await Estacionamento.findAll();
 
     res.status(200).send(historicoParques);
   } catch (e) {

@@ -78,18 +78,29 @@ const getMatriculaUtilizador = async (req, res) => {
 const mudarMatriculaUtilizador = async (req, res) => {
   const { idUtilizador, idMatricula } = req.query;
 
-  //update à matricula que quer mudar
-  // pegar na matricula que está isSelected e colocar a falso
-
   try {
-    matriculasUser = await Matricula.findAll({
+    let currentMatricula = await Matricula.findOne({
       where: {
         idUtilizador: idUtilizador,
+        isSelected: true,
       },
     });
 
-    res.status(200).send(matriculasUser);
+    await currentMatricula.update({ isSelected: false });
+
+    let newSelectedMatricula = await Matricula.findOne({
+      where: {
+        id: idMatricula,
+      },
+    });
+
+    await newSelectedMatricula.update({ isSelected: true });
+
+    let allMatriculas = await Matricula.findAll();
+
+    res.status(200).send(allMatriculas);
   } catch (e) {
+    console.log(e);
     res.status(400).send("Ocorreu Algum Erro");
   }
 };
@@ -99,4 +110,5 @@ module.exports = {
   createMatricula,
   getMatriculaUtilizador,
   getMatriculaByIdService,
+  mudarMatriculaUtilizador,
 };
