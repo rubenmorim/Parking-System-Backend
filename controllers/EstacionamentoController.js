@@ -121,8 +121,6 @@ const getHistorico = async (req, res) => {
       })
     );
 
-    console.log(finalParques);
-
     res.status(200).send(finalParques);
   } catch (e) {
     console.log(e);
