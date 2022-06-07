@@ -27,12 +27,13 @@ const createUtilizador = async (req, res) => {
       lastName: lastName,
       birthday: birthday,
     });
+    let userID = createdUser.dataValues.id;
 
     if (nomeCarro && matricula) {
-      await createMatriculaService(createdUser.id, nomeCarro, matricula, true);
+      await createMatriculaService(userID, nomeCarro, matricula, true);
     }
 
-    res.status(200).send("Registado com sucesso!");
+    res.status(200).send(createdUser.dataValues);
   } catch (error) {
     console.log(error);
     res.status(400).send("Ocorreu algum erro");
