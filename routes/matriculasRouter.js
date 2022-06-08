@@ -14,7 +14,7 @@ router.get(
   MatriculaController.mudarMatriculaUtilizador
 );
 
-router.get(
+router.delete(
   "/apagarMatricula/:idMatricula",
   MatriculaController.apagarMatricula
 );
