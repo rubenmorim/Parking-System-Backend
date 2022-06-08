@@ -74,6 +74,22 @@ const getMatriculaUtilizador = async (req, res) => {
   }
 };
 
+const apagarMatricula = async (req, res) => {
+  const { idMatricula } = req.params;
+
+  try {
+    await Matricula.destroy({
+      where: {
+        id: idMatricula,
+      },
+    });
+
+    res.status(200).send("Apagado com sucesso");
+  } catch (e) {
+    res.status(400).send("Ocorreu Algum Erro");
+  }
+};
+
 //Mudar Matricula - Not Implemented
 const mudarMatriculaUtilizador = async (req, res) => {
   const { idUtilizador, idMatricula } = req.query;
@@ -106,6 +122,7 @@ const mudarMatriculaUtilizador = async (req, res) => {
 };
 
 module.exports = {
+  apagarMatricula,
   createMatriculaService,
   createMatricula,
   getMatriculaUtilizador,

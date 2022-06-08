@@ -14,4 +14,9 @@ router.get(
   MatriculaController.mudarMatriculaUtilizador
 );
 
+router.get(
+  "/apagarMatricula/:idMatricula",
+  MatriculaController.apagarMatricula
+);
+
 module.exports = router;
