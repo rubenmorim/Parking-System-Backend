@@ -111,9 +111,9 @@ const getEstacionamentoAtual = async (req, res) => {
 const iniciarParquimetro = async (req, res) => {
   const { idUtilizador, idParque, tempoParque } = req.body;
   let finalDate = null;
-  
-  if(tempoParque !== null){
-     finalDate = moment().add(tempoParque, "m").format("YYYY-MM-DD HH:mm:ss");
+
+  if (tempoParque !== null) {
+    finalDate = moment().add(tempoParque, "m").format("YYYY-MM-DD HH:mm:ss");
   }
 
   let currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -200,8 +200,15 @@ const concluirParquimetro = async (req, res) => {
       idUtilizador
     );
 
+    let actualTime = moment().format("YYYY-MM-DD HH:mm:ss");
+
     await gerirLugares("add", parquimetroAtual.dataValues.idParque);
-    await parquimetroAtual.update({ isPago: true });
+    if (parquimetroAtual.dataValues.saida !== null) {
+      await parquimetroAtual.update({ isPago: true });
+    } else {
+      await parquimetroAtual.update({ isPago: true, saida: actualTime });
+    }
+
     res.status(200).send(parquimetroAtual);
   } catch (e) {
     console.log(e);
