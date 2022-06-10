@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       saida: {
         type: DataTypes.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       isPago: {
         type: DataTypes.BOOLEAN,

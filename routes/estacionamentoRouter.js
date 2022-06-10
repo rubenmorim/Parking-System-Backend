@@ -2,9 +2,16 @@ const EstacionamentoController = require("../controllers/EstacionamentoControlle
 
 const router = require("express").Router();
 
+router.post("/createReserva", EstacionamentoController.createReserva);
+
 router.post("/iniciarParquimetro", EstacionamentoController.iniciarParquimetro);
 
 router.get("/getHistorico/:id", EstacionamentoController.getHistorico);
+
+router.get(
+  "/getReservasByUser/:idUtilizador",
+  EstacionamentoController.getReservasByUser
+);
 
 router.get(
   "/getEstacionamentoAtual",
