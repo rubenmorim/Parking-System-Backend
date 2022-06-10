@@ -110,8 +110,11 @@ const getEstacionamentoAtual = async (req, res) => {
 
 const iniciarParquimetro = async (req, res) => {
   const { idUtilizador, idParque, tempoParque } = req.body;
-
-  let finalDate = moment().add(tempoParque, "m").format("YYYY-MM-DD HH:mm:ss");
+  let finalDate = null;
+  
+  if(tempoParque !== null){
+     finalDate = moment().add(tempoParque, "m").format("YYYY-MM-DD HH:mm:ss");
+  }
 
   let currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
   try {
