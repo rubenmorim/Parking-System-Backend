@@ -16,7 +16,6 @@ const gerirLugares = async (action, idParque) => {
     let parqueAtual = await getParqueByIdService(idParque);
 
     let NewtotalLugares;
-
     if (action === "add") {
       NewtotalLugares = parqueAtual[0].dataValues.totalLugares + 1;
     } else {
@@ -199,11 +198,11 @@ const concluirParquimetro = async (req, res) => {
     let parquimetroAtual = await getEstacionamentoByIdUtilizadorService(
       idUtilizador
     );
-
+    console.log(parquimetroAtual.dataValues);
     let actualTime = moment().format("YYYY-MM-DD HH:mm:ss");
 
     await gerirLugares("add", parquimetroAtual.dataValues.idParque);
-    if (parquimetroAtual.dataValues.saida !== null) {
+    if (parquimetroAtual.dataValues.saida === null) {
       await parquimetroAtual.update({ isPago: true });
     } else {
       await parquimetroAtual.update({ isPago: true, saida: actualTime });
@@ -255,19 +254,26 @@ const getReservasByUser = async (req, res) => {
     let response = await Estacionamento.findAll({
       where: { idUtilizador: idUtilizador },
     });
-    let reservas = [];
-    response.forEach((item) => {
-      let currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
-      let startDateItem = moment(item.dataValues.entrada).format(
-        "YYYY-MM-DD HH:mm:ss"
-      );
+    let reservas = await Promise.all(
+      response.map(async (item) => {
+        let parque = await getParqueByIdService(item.dataValues.idParque);
 
-      if (currentDate < startDateItem) {
-        reservas.push(item);
-      }
+        let currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
+        let startDateItem = moment(item.dataValues.entrada).format(
+          "YYYY-MM-DD HH:mm:ss"
+        );
+
+        if (currentDate < startDateItem) {
+          return { reserva: item, parque: parque[0] };
+        }
+      })
+    );
+
+    const reservasFinal = reservas.filter((element) => {
+      return element !== null;
     });
 
-    res.status(200).send(reservas);
+    res.status(200).send(reservasFinal);
   } catch (e) {
     console.log(e);
     res.status(400).send("Ocorreu Algum Erro");
