@@ -2,6 +2,11 @@ const tipoPagamentoController = require("../controllers/TipoPagamentoController.
 
 const router = require("express").Router();
 
-router.get("/allTipoPagamento", tipoPagamentoController.getAllTipoPagamento);
+router.get(
+  "/allTipoPagamentoByUtilizador/:id",
+  tipoPagamentoController.getAllTipoByUtilizadorPagamento
+);
+
+router.post("/createTipoPagamento", tipoPagamentoController.createTipo);
 
 module.exports = router;

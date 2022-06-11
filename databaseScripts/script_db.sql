@@ -4,10 +4,6 @@ Create Database Parking_System ;
 Use Parking_System;
 
 
-CREATE TABLE tipoPagamento (
-  id bigint AUTO_INCREMENT PRIMARY KEY,
-  tipoPagamento Varchar(50)	
-);
 
 CREATE TABLE tipoParque (
   id bigint AUTO_INCREMENT PRIMARY KEY,
@@ -22,6 +18,14 @@ CREATE TABLE Utilizador (
   lastName Varchar(50) Not Null,
   birthday Varchar(50) Not Null
 );
+
+CREATE TABLE tipoPagamento (
+  id bigint AUTO_INCREMENT PRIMARY KEY,
+  tipoPagamento Varchar(50)	,
+  idUtilizador bigint Not Null,
+  Constraint fk_tipoPagamentoUtilizador FOREIGN KEY(idUtilizador) REFERENCES Utilizador(id)
+);
+
 
 CREATE TABLE Wallet (
   id bigint AUTO_INCREMENT PRIMARY KEY,
@@ -74,9 +78,6 @@ CREATE TABLE Estacionamento (
 /* Scripts de dados */
 
 
-/* Tipo Pagamento */ 
-Insert Into tipoPagamento(tipoPagamento) Values ("Cartão de Crédito");
-Insert Into tipoPagamento(tipoPagamento) Values ("Paypal");
 
 /* Tipo Parque */ 
 Insert Into tipoParque(tipoParque) Values ("Parque");
@@ -92,12 +93,9 @@ Insert Into tipoParque(tipoParque) Values ("Parquímetro");
 --   on Utilizador.id = Matricula.idUtilizador 
 --  Where Utilizador.id = 1654106112592;
 
-/*--------Estacionamento */ 
-
-Select * from Estacionamento;
 
 
-Select * from Matricula
+
 
 /* Parques*/
 

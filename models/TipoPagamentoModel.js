@@ -10,6 +10,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      idUtilizador: {
+        type: DataTypes.BIGINT,
+        allowNull: false,
+        references: {
+          model: "Utilizador",
+          key: "id",
+        },
+      },
     },
     { freezeTableName: true, timestamps: false }
   );

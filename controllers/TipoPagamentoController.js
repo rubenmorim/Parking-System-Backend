@@ -1,16 +1,43 @@
 const db = require("../models");
+const { generateID } = require("./utils.js");
 
 //create Main Model
 
 const TipoPagamento = db.TipoPagamento;
 
 //main Work
-const getAllTipoPagamento = async (req, res) => {
-  let tipoPagamentos = await TipoPagamento.findAll({});
+const getAllTipoByUtilizadorPagamento = async (req, res) => {
+  const { id } = req.params;
+  try {
+    let tipoPagamentos = await TipoPagamento.findAll({
+      where: {
+        idUtilizador: id,
+      },
+    });
 
-  res.status(200).send(tipoPagamentos);
+    res.status(200).send(tipoPagamentos);
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Ocorreu algum erro");
+  }
+};
+
+const createTipo = async (req, res) => {
+  const { idUtilizador, pagamento } = req.body;
+  try {
+    await TipoPagamento.create({
+      id: generateID(),
+      idUtilizador: idUtilizador,
+      tipoPagamento: pagamento,
+    });
+    res.status(200).send("Criado com sucesso");
+  } catch (e) {
+    console.log(e);
+    res.status(500).send("Ocorreu algum erro");
+  }
 };
 
 module.exports = {
-  getAllTipoPagamento,
+  getAllTipoByUtilizadorPagamento,
+  createTipo,
 };
