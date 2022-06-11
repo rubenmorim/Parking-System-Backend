@@ -15,7 +15,7 @@ router.get(
 );
 
 router.delete(
-  "/apagarMatricula/:matricula",
+  "/apagarMatricula/:idMatricula",
   MatriculaController.apagarMatricula
 );
 
