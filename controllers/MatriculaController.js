@@ -75,7 +75,7 @@ const getMatriculaUtilizador = async (req, res) => {
 };
 
 const apagarMatricula = async (req, res) => {
-  const { matricula } = req.params;
+  const { idMatricula } = req.params;
 
   try {
     await Matricula.destroy({
