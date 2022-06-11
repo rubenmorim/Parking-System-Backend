@@ -255,25 +255,24 @@ const getReservasByUser = async (req, res) => {
       where: { idUtilizador: idUtilizador },
     });
     let reservas = await Promise.all(
-      response.map(async (item) => {
-        let parque = await getParqueByIdService(item.dataValues.idParque);
+      response
+        .filter((item) => {
+          let currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
+          let startDateItem = moment(item.dataValues.entrada).format(
+            "YYYY-MM-DD HH:mm:ss"
+          );
+          if (currentDate < startDateItem) {
+            return item;
+          }
+        })
+        .map(async (item) => {
+          let parque = await getParqueByIdService(item.dataValues.idParque);
 
-        let currentDate = moment().format("YYYY-MM-DD HH:mm:ss");
-        let startDateItem = moment(item.dataValues.entrada).format(
-          "YYYY-MM-DD HH:mm:ss"
-        );
-
-        if (currentDate < startDateItem) {
           return { reserva: item, parque: parque[0] };
-        }
-      })
+        })
     );
 
-    const reservasFinal = reservas.filter((element) => {
-      return element !== null;
-    });
-
-    res.status(200).send(reservasFinal);
+    res.status(200).send(reservas);
   } catch (e) {
     console.log(e);
     res.status(400).send("Ocorreu Algum Erro");
