@@ -49,7 +49,7 @@ CREATE TABLE Parque (
   id bigint AUTO_INCREMENT PRIMARY KEY,
   idTipoParque bigint Not Null,
   nomeParque Varchar(100) Not Null,
-  precoHora float Not Null,
+  precoMinuto float Not Null,
   totalVagas INT Not Null,
   totalOcupados INT Not Null default 0,
   latitude float Not Null,

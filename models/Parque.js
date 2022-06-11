@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      precoHora: {
+      precoMinuto: {
         type: DataTypes.FLOAT,
         allowNull: false,
       },
