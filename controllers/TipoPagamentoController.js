@@ -18,7 +18,7 @@ const getAllTipoByUtilizadorPagamento = async (req, res) => {
     res.status(200).send(tipoPagamentos);
   } catch (e) {
     console.log(e);
-    res.status(500).send("Ocorreu algum erro");
+    res.status(500).send({ message: "Ocorreu algum erro" });
   }
 };
 
@@ -30,10 +30,10 @@ const createTipo = async (req, res) => {
       idUtilizador: idUtilizador,
       tipoPagamento: pagamento,
     });
-    res.status(200).send("Criado com sucesso");
+    res.status(200).json({ message: "Criado com sucesso" });
   } catch (e) {
     console.log(e);
-    res.status(500).send("Ocorreu algum erro");
+    res.status(500).json({ message: "Ocorreu algum erro" });
   }
 };
 

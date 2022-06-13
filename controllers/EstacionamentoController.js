@@ -155,6 +155,13 @@ const getHistorico = async (req, res) => {
         let parqueItem = await getParqueByIdService(item.dataValues.idParque);
         item.dataValues["nomeParque"] = parqueItem[0].dataValues.nomeParque;
 
+        let dataEntrada = moment(item.dataValues.entrada);
+        let dataSaida = moment(item.dataValues.saida);
+
+        var diff = dataSaida.diff(dataEntrada, "minutes");
+        item.dataValues["tempo"] = diff;
+        item.dataValues["preco"] =
+          parseInt(parqueItem[0].dataValues.precoMinuto) * diff;
         return item.dataValues;
       })
     );
